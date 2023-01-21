@@ -55,7 +55,7 @@
 
 - name: Load Schema
   community.mongodb.mongodb_shell:
-    login_host: "172.31.14.29"
+    login_host: mongodb.roboshop.internal
     file: "/app/schema/catalogue.js"
     idempotent: yes
 
