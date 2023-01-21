@@ -1,3 +1,59 @@
-- name: Catalogue
-  ansible.builtin.debug:
-    msg: Hello from Catalogue
+- name: Configuring NodeJS repos
+  ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
+
+- name: Install NodeJS
+  ansible.builtin.yum:
+    name: nodejs
+    state: installed
+
+- name: Add Application User
+  ansible.builtin.user:
+    name: roboshop
+
+- name: Remove old App Content
+  ansible.builtin.file:
+    path: /app
+    state: absent
+
+- name: Create app directory
+  ansible.builtin.file:
+    path: /app
+    state: directory
+
+- name: Download Frontend App Content
+  ansible.builtin.unarchive:
+    src: https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip
+    dest: /app
+    remote_src: yes
+
+- name: Install NodeJS Dependencies
+  community.general.npm:
+    path: /app
+    state: latest
+
+- name: Copy SystemD file
+  ansible.builtin.copy:
+    src: catalogue.service
+    dest: /etc/systemd/system/catalogue.service
+
+- name: Start Catalogue Service
+  ansible.builtin.systemd:
+    name: catalogue
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
+
+
+
+#source common.sh
+#
+#component=catalogue
+#schema_load=true
+#schema_type=mongo
+#
+#NODEJS
+
+
+#
+#  LOAD_SCHEMA
+#}
