@@ -2,6 +2,7 @@
   ansible.builtin.yum:
     name: nginx
     state: installed
+  become: true
 
 #print_head "Install Nginx"
 #yum install nginx -y &>>${LOG}
