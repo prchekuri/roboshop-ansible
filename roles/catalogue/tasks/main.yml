@@ -43,6 +43,21 @@
     daemon_reload: yes
     enabled: yes
 
+- name: Copy MongoDB YUM Repo file
+  ansible.builtin.copy:
+    src: mongodb.repo
+    dest: /etc/yum.repos.d/mongodb.repo
+
+- name: Install Mongodb Server
+  ansible.builtin.yum:
+    name: mongodb-org-shell
+    state: installed
+
+- name: Load Schema
+  community.mongodb.mongodb_shell:
+    login_host: 172.31.14.29
+    file: "/app/schema/catalogue.js"
+    idempotent: yes
 
 
 #source common.sh
