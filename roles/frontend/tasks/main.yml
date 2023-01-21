@@ -2,12 +2,13 @@
   ansible.builtin.yum:
     name: nginx
     state: installed
-  become: true
 
-#print_head "Install Nginx"
-#yum install nginx -y &>>${LOG}
-#status_check
-#
+- name: Remove old HTTP documents
+  ansible.builtin.file:
+    path: /usr/share/nginx/html
+    state: absent
+
+
 #print_head "Remove old Nginx content"
 #rm -rf /usr/share/nginx/html/* &>>${LOG}
 #status_check
