@@ -1,4 +1,4 @@
-- name: Install Maven
+- name: Install Python
   ansible.builtin.yum:
     name:
       - python36
