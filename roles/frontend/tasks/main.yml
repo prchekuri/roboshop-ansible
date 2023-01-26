@@ -2,6 +2,7 @@
   ansible.builtin.yum:
     name: nginx
     state: installed
+    enabled: yes
 
 - name: Remove old HTML documents
   ansible.builtin.file:
