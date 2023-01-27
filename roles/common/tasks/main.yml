@@ -1,0 +1,2 @@
+- name: Set Hostname for EC2 instances
+  ansible.builtin.shell: set-hostname {{component}}
