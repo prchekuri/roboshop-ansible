@@ -10,6 +10,6 @@
 
 - name: Load Schema
   community.mongodb.mongodb_shell:
-    login_host: mongodb.roboshop.internal
+    login_host: mongodb-dev.devopstrainingb70.online
     file: "/app/schema/{{component}}.js"
     idempotent: yes
